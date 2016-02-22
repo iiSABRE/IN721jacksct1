@@ -12,13 +12,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        selectDogBreed();
+    }
 
-        TextView headerString = (TextView) findViewById(R.id.txtviewHeader);
-        String dogBreed = "";
+    public int pickRandom()
+    {
         Random rBreed = new Random();
         int pickBreed = rBreed.nextInt(4);
+        return pickBreed;
+    }
 
-        switch(pickBreed)
+    public void selectDogBreed()
+    {
+        TextView headerString = (TextView) findViewById(R.id.txtviewHeader);
+        String dogBreed = "";
+
+        switch(pickRandom())
         {
             case 0:
                 headerString.setText("Poodle");
@@ -34,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
-
-
     }
+
+
+
 
 
 }

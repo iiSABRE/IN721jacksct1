@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">complexScreenControlsPract2.2</string>
+    <string name="question">Which instrument do you want to learn to play?</string>
+    <string name="enrolledIn">You have enrolled for </string>
+    <string-array name="MonthsArray">
+        <item>"January"</item>
+        <item>"February"</item>
+        <item>"March"</item>
+        <item>"April"</item>
+        <item>"May"</item>
+        <item>"June"</item>
+        <item>"July"</item>
+        <item>"August"</item>
+        <item>"September"</item>
+        <item>"October"</item>
+        <item>"November"</item>
+        <item>"December"</item>
+    </string-array>
+</resources>

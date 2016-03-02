@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MultipleActivitiesPract3.1Task1</string>
+    <string name="btnLabelForNextActivity">Next Screen</string>
+    <string name="titleForScreenA">Activity A</string>
+    <string name="titleForScreenB">Screen B</string>
+    <string name="btnLabelToGoToWebsite">Go to site</string>
+    <string name="titleForScreenC">Screen C</string>
+    <string name="websiteUrlReddit">https://www.reddit.com/</string>
+</resources>

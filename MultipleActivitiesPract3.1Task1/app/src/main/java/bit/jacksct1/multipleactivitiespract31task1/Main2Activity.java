@@ -14,21 +14,26 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Get button reference and set text
         Button btnNextAct = (Button)findViewById(R.id.btnNextAct);
         btnNextAct.setText(R.string.btnLabelForNextActivity);
 
+        //Get TextView reference and set text
         TextView tvScreenNumber = (TextView) findViewById((R.id.tvScreenNumber));
         tvScreenNumber.setText(R.string.titleForScreenB);
 
+        //Create handler and set onClickListener to button
         ChangeActivityViaButton handler = new ChangeActivityViaButton();
         btnNextAct.setOnClickListener(handler);
     }
 
+    //Create inner class implementing OnClickListener
     class ChangeActivityViaButton implements View.OnClickListener
     {
         @Override
         public void onClick(View v)
         {
+            //Create Intent and call its startActivity method to go to next Activity
             Intent changeActivityIntent = new Intent(Main2Activity.this, Main3Activity.class);
             startActivity(changeActivityIntent);
         }

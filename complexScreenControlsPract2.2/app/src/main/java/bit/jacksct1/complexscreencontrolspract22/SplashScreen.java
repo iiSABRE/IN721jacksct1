@@ -12,7 +12,9 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        //Create handler
         Handler handler = new Handler();
+        //Create runnable and generate it run method to call the toMainActivity()
         Runnable runnable = new Runnable() {
             @Override
             public void run()
@@ -20,11 +22,13 @@ public class SplashScreen extends AppCompatActivity {
                 toMainActivity();
             }
         };
+        //Call handler postDelayed using runable and setting it to 5sec delay
         handler.postDelayed(runnable, 5000);
 
 
     }
 
+    //ToMainActivity method chanes the current activity
     public void toMainActivity()
     {
         Intent changeActivityIntent = new Intent(this, MainActivity.class);

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public void SetUpListView()
     {
         String[] toDo = {"Activities", "Shopping", "Dining", "Servives"};
-        ArrayAdapter<String> toDoAdapter = new ArrayAdapter<String>(this, R.layout.activity_main, toDo);
+        ArrayAdapter<String> toDoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, toDo);
         ListView toDoListView = (ListView) findViewById(R.id.lvThingsToDo);
         toDoListView.setAdapter(toDoAdapter);
     }

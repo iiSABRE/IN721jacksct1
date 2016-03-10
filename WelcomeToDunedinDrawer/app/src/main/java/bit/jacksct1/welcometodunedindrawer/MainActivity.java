@@ -1,4 +1,4 @@
-package bit.jacksct1.welcometodunedinlist;
+package bit.jacksct1.welcometodunedindrawer;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         ListView toDoListView = (ListView) findViewById(R.id.lvThingsToDo);
         toDoListView.setOnItemClickListener(new DunedinActivityListHandler());
-
     }
 
     public class DunedinActivityListHandler implements AdapterView.OnItemClickListener

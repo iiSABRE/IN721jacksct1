@@ -18,20 +18,21 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:id="@+id/ivBanner"
         android:layout_below="@+id/tvMainTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="24dp"
+        android:src="@drawable/banner"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvThingsToDo"
+        android:layout_marginTop="88dp"
         android:layout_below="@+id/ivBanner"
-        android:layout_toLeftOf="@+id/tvMainTitle"
-        android:layout_toStartOf="@+id/tvMainTitle"
-        android:layout_marginTop="220dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivBanner"
+        android:layout_below="@+id/tvMainTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/meridian"
+        />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvThingsToDo"
+        android:layout_below="@+id/ivBanner"
+        android:layout_toLeftOf="@+id/tvMainTitle"
+        android:layout_toStartOf="@+id/tvMainTitle"
+        android:layout_marginTop="220dp" />
+
+</android.support.v4.widget.DrawerLayout>

@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_tablet);
 
         //Get reference to Image Button
         Button btnImageFragment = (Button) findViewById(R.id.btnImageView);
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             Fragment listFragment = new ShowListFragment();
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_container_image,listFragment);
+            ft.replace(R.id.fragment_container_list,listFragment);
             ft.commit();
         }
     }

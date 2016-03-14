@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">IntroToFragments</string>
+    <string-array name="CapitalsArray">
+        <item>"Amsterdam"</item>
+        <item>"Berlin"</item>
+        <item>"Chiang Mai"</item>
+        <item>"Dublin"</item>
+        <item>"Edmonton"</item>
+    </string-array>
 </resources>

@@ -35,4 +35,19 @@ public class MainActivity extends AppCompatActivity {
             ft.commit();
         }
     }
+
+    public class ViewListFragment implements View.OnClickListener
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            Fragment imageFragment = new ShowListFragment();
+            FragmentManager fm = getFragmentManager();
+
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.fragment_container_image, imageFragment);
+            ft.commit();
+        }
+    }
 }

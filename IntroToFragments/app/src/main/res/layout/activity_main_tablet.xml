@@ -10,8 +10,8 @@
     android:baselineAligned="false">>
     <LinearLayout
         android:id="@+id/fragment_container_image"
-        android:layout_width="1000px"
-        android:layout_height="800px"
+        android:layout_width="1000dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_weight="1">
 
@@ -19,8 +19,8 @@
 
     <LinearLayout
         android:id="@+id/fragment_container_list"
-        android:layout_width="1000px"
-        android:layout_height="800px"
+        android:layout_width="1000dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_weight="1">
 
@@ -36,23 +36,18 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Image View"
+        android:text="@string/btnImageText"
         android:id="@+id/btnImageView"
         android:layout_marginBottom="28dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnListView"
-        android:layout_toStartOf="@+id/btnListView"
         android:layout_marginRight="34dp"
-        android:layout_marginEnd="34dp" />
+        android:layout_marginEnd="34dp"
+ />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="List View"
+        android:text="@string/btnListText"
         android:id="@+id/btnListView"
-        android:layout_alignBottom="@+id/btnImageView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="49dp"
         android:layout_marginEnd="49dp" />
 </LinearLayout>

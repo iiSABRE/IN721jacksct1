@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">IntroToFragments</string>
+    <string name="image_header">Here is an image</string>
+    <string name="btnImageText">Image View</string>
+    <string name="btnListText">List View</string>
     <string-array name="CapitalsArray">
         <item>"Amsterdam"</item>
         <item>"Berlin"</item>

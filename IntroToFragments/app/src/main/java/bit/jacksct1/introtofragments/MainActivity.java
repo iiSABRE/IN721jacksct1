@@ -17,8 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnImageFragment = (Button) findViewById(R.id.btnImageView);
-        ViewImageFragment handler = new ViewImageFragment();
-        btnImageFragment.setOnClickListener(handler);
+        ViewImageFragment imageHandler = new ViewImageFragment();
+        btnImageFragment.setOnClickListener(imageHandler);
+
+        Button btnListFragment = (Button) findViewById(R.id.btnListView);
+        ViewListFragment listHandler = new ViewListFragment();
+        btnListFragment.setOnClickListener(listHandler);
     }
 
     public class ViewImageFragment implements View.OnClickListener
@@ -42,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-            Fragment imageFragment = new ShowListFragment();
+            Fragment listFragment = new ShowListFragment();
             FragmentManager fm = getFragmentManager();
 
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_container_image, imageFragment);
+            ft.replace(R.id.fragment_container_image,listFragment);
             ft.commit();
         }
     }

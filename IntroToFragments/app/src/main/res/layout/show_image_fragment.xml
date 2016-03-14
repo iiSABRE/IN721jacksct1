@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:text="This is an image"
         android:id="@+id/tvImageHeading"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/fragment_header_size"/>
 
     <ImageView
         android:layout_width="wrap_content"

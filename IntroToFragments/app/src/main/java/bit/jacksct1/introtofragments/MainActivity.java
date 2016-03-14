@@ -16,39 +16,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Get reference to Image Button
         Button btnImageFragment = (Button) findViewById(R.id.btnImageView);
+        //Create handler
         ViewImageFragment imageHandler = new ViewImageFragment();
+        //Set the buttons onClickListener by passing in the handler
         btnImageFragment.setOnClickListener(imageHandler);
 
+
+        //Get reference to Image Button
         Button btnListFragment = (Button) findViewById(R.id.btnListView);
+        //Create handler
         ViewListFragment listHandler = new ViewListFragment();
+        //Set the buttons onClickListener by passing in the handler
         btnListFragment.setOnClickListener(listHandler);
     }
 
+    //Create class to implement onClickListener
     public class ViewImageFragment implements View.OnClickListener
     {
 
         @Override
         public void onClick(View v)
         {
+            //Instantiate the fragment
             Fragment imageFragment = new ShowImageFragment();
             FragmentManager fm = getFragmentManager();
-
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container_image, imageFragment);
             ft.commit();
         }
     }
 
+    //Create class to implement onClickListener
     public class ViewListFragment implements View.OnClickListener
     {
 
         @Override
         public void onClick(View v)
         {
+            //Instantiate the fragment
             Fragment listFragment = new ShowListFragment();
             FragmentManager fm = getFragmentManager();
-
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_container_image,listFragment);
             ft.commit();

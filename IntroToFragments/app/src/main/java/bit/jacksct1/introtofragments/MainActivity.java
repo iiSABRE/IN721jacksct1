@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v)
         {
 
-            //Instantiate the fragment 
+            //Instantiate the fragment
             Fragment listFragment = new ShowListFragment();
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();

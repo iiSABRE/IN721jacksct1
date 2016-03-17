@@ -16,9 +16,10 @@ public class Main2Activity extends AppCompatActivity {
         TextView colouredText = (TextView) findViewById(R.id.tvColouredText);
         Integer colour = colouredText.getCurrentTextColor();
 
+        String colString = Integer.toString(colour);
 
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("colour", colour);
+        returnIntent.putExtra("colour", colString);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }

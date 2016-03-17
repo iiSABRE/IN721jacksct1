@@ -2,6 +2,7 @@ package bit.jacksct1.passingdatabyrequest;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
         if ((requestCode == 0 && (resultCode == Activity.RESULT_OK)))
         {
             String result = data.getStringExtra("colour");
-
+            //String hexColor = String.format("#%06X", (0xFFFFFF & result));
+            //Toast.makeText(MainActivity.this, "Username must be" + result + "8rtiurwe", Toast.LENGTH_LONG).show();
             TextView mainText = (TextView) findViewById(R.id.tvBigText);
-            mainText.setText(result);
+            mainText.setTextColor(Color.parseColor(result));
 
         }
     }

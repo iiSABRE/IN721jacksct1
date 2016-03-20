@@ -21,14 +21,16 @@ public class DialogFrag extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
+        CharSequence selected = getArguments().getCharSequence("instrument");
+
         //Create builder
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         //set the dialogfragment properties using the builder
         builder.setIcon(R.drawable.music_disk);
-        builder.setTitle("Enrollment Confirmation");
-        builder.setPositiveButton("Yes", new YesButtonHandler());
-        builder.setNegativeButton("No", new NoButtonHandler());
+        builder.setTitle("Confirm " + selected +  " Classes");
+        builder.setPositiveButton("Confirm", new YesButtonHandler());
+        builder.setNegativeButton("Cancel", new NoButtonHandler());
         Dialog customDialog = builder.create();
 
         return customDialog;

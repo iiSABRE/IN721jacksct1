@@ -50,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
             //Create dialog fragment, create manager then show fragment
             dialogFrag = new DialogFrag();
+
+            RadioGroup instrumentGroup = (RadioGroup) findViewById(R.id.rgInstruments);
+            int selectedRadioId = instrumentGroup.getCheckedRadioButtonId();
+            RadioButton selectedRadio = (RadioButton) findViewById(selectedRadioId);
+
+            Bundle selectedInstrument = new Bundle();
+            selectedInstrument.putCharSequence("instrument", selectedRadio.getText());
+            dialogFrag.setArguments(selectedInstrument);
+
             FragmentManager fm = getFragmentManager();
             dialogFrag.show(fm, "confirm");
 

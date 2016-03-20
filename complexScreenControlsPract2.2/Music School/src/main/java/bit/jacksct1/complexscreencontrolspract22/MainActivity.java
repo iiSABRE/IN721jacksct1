@@ -1,5 +1,6 @@
 package bit.jacksct1.complexscreencontrolspract22;
 
+import android.app.FragmentManager;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    DialogFrag dialogFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,8 +45,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-            //Calling the method to generate the enrollment message
-           generateEnrollment();
+            //Calling the method to generate the enrollment message (DISABLED)
+            //generateEnrollment();
+
+            dialogFrag = new DialogFrag();
+            FragmentManager fm = getFragmentManager();
+            dialogFrag.show(fm, "confirm");
+
         }
 
 
@@ -62,8 +70,17 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, layoutID, monthsArray);
         monthSpinner.setAdapter(monthAdapter);
     }
+    
+    public void giveMeMyData(boolean confirmEnrollment)
+    {
+        dialogFrag.dismiss();
+
+
+    }
 
     //Enrollment message handler method
+    //Disabled for Dialog Fragment update
+    /*
     public void generateEnrollment()
     {
         //Getting the text from the selected radio button
@@ -80,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         tvEnrolled.setText("" + resourceResolver.getString(R.string.enrolledIn) + " " + selectedRadio.getText() + " lessons in " + monthSpinner.getSelectedItem());
 
     }
+    */
 
 
 }

@@ -70,10 +70,26 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, layoutID, monthsArray);
         monthSpinner.setAdapter(monthAdapter);
     }
-    
+
     public void giveMeMyData(boolean confirmEnrollment)
     {
         dialogFrag.dismiss();
+        TextView postConfirm = (TextView) findViewById(R.id.tvPostConfirm);
+
+        //Getting the text from the selected radio button
+        RadioGroup instrumentGroup = (RadioGroup) findViewById(R.id.rgInstruments);
+        int selectedRadioId = instrumentGroup.getCheckedRadioButtonId();
+        RadioButton selectedRadio = (RadioButton) findViewById(selectedRadioId);
+        Spinner monthSpinner = (Spinner) findViewById(R.id.spMonths);
+        Resources resourceResolver = getResources();
+
+        if(confirmEnrollment) {
+            postConfirm.setText("" + resourceResolver.getString(R.string.enrolledIn) + " " + selectedRadio.getText() + " lessons in " + monthSpinner.getSelectedItem());
+        }
+        else
+        {
+            postConfirm.setText(R.string.declined);
+        }
 
 
     }

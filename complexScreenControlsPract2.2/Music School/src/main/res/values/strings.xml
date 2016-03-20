@@ -2,6 +2,7 @@
     <string name="app_name">complexScreenControlsPract2.2</string>
     <string name="question">Which instrument do you want to learn to play?</string>
     <string name="enrolledIn">You have enrolled for </string>
+    <string name="declined">You have declined to enroll</string>
     <string-array name="MonthsArray">
         <item>"January"</item>
         <item>"February"</item>

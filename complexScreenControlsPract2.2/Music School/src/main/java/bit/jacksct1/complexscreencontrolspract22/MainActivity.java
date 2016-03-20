@@ -1,5 +1,6 @@
 package bit.jacksct1.complexscreencontrolspract22;
 
+import android.app.FragmentManager;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    DialogFrag dialogFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,8 +45,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
-            //Calling the method to generate the enrollment message
-           generateEnrollment();
+            //Calling the method to generate the enrollment message (DISABLED)
+            //generateEnrollment();
+
+            //Create dialog fragment, create manager then show fragment
+            dialogFrag = new DialogFrag();
+
+            RadioGroup instrumentGroup = (RadioGroup) findViewById(R.id.rgInstruments);
+            int selectedRadioId = instrumentGroup.getCheckedRadioButtonId();
+            RadioButton selectedRadio = (RadioButton) findViewById(selectedRadioId);
+
+            Bundle selectedInstrument = new Bundle();
+            selectedInstrument.putCharSequence("instrument", selectedRadio.getText());
+            dialogFrag.setArguments(selectedInstrument);
+
+            FragmentManager fm = getFragmentManager();
+            dialogFrag.show(fm, "confirm");
+
         }
 
 
@@ -52,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     //spinner handling method
     public void spinnerHandler()
     {
+
         Resources resourceResolver = getResources();
         Spinner monthSpinner = (Spinner) findViewById(R.id.spMonths);
         int layoutID = android.R.layout.simple_spinner_item;
@@ -63,7 +82,35 @@ public class MainActivity extends AppCompatActivity {
         monthSpinner.setAdapter(monthAdapter);
     }
 
+    public void giveMeMyData(boolean confirmEnrollment)
+    {
+        //Dismiss dialog window
+        dialogFrag.dismiss();
+        TextView postConfirm = (TextView) findViewById(R.id.tvPostConfirm);
+
+        //Getting the text from the selected radio button
+        RadioGroup instrumentGroup = (RadioGroup) findViewById(R.id.rgInstruments);
+        int selectedRadioId = instrumentGroup.getCheckedRadioButtonId();
+        RadioButton selectedRadio = (RadioButton) findViewById(selectedRadioId);
+        Spinner monthSpinner = (Spinner) findViewById(R.id.spMonths);
+        Resources resourceResolver = getResources();
+
+        //If YES was clicked set textview to enrollment text
+        if(confirmEnrollment) {
+            postConfirm.setText("" + resourceResolver.getString(R.string.enrolledIn) + " " + selectedRadio.getText() + " lessons in " + monthSpinner.getSelectedItem());
+        }
+        //If NO clicked then set textview to declined
+        else
+        {
+            postConfirm.setText(R.string.declined);
+        }
+
+
+    }
+
     //Enrollment message handler method
+    //Disabled for Dialog Fragment update
+    /*
     public void generateEnrollment()
     {
         //Getting the text from the selected radio button
@@ -80,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         tvEnrolled.setText("" + resourceResolver.getString(R.string.enrolledIn) + " " + selectedRadio.getText() + " lessons in " + monthSpinner.getSelectedItem());
 
     }
+    */
 
 
 }

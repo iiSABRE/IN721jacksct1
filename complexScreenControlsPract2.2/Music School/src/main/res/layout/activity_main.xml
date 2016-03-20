@@ -115,4 +115,11 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="38dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvPostConfirm"
+        android:layout_below="@+id/btnConfirm"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

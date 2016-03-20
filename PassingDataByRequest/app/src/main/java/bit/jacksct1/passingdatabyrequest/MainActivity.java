@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if ((requestCode == 0 && (resultCode == Activity.RESULT_OK)))
         {
             String result = data.getStringExtra("colour");
-            //String hexColor = String.format("#%06X", (0xFFFFFF & result));
+            String hexColor = String.format("#%06X", (0xFFFFFF & result));
             //Toast.makeText(MainActivity.this, "Username must be" + result + "8rtiurwe", Toast.LENGTH_LONG).show();
             TextView mainText = (TextView) findViewById(R.id.tvBigText);
             mainText.setTextColor(Color.parseColor(result));

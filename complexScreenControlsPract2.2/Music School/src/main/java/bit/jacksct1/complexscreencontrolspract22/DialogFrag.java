@@ -12,6 +12,8 @@ import bit.jacksct1.complexscreencontrolspract22.R;
 /**
  * Created by jacksct1 on 20/03/2016.
  */
+
+//class extending the DialogFragment class
 public class DialogFrag extends DialogFragment
 {
 
@@ -19,8 +21,10 @@ public class DialogFrag extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
+        //Create builder
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        //set the dialogfragment properties using the builder
         builder.setIcon(R.drawable.music_disk);
         builder.setTitle("Enrollment Confirmation");
         builder.setPositiveButton("Yes", new YesButtonHandler());
@@ -31,6 +35,7 @@ public class DialogFrag extends DialogFragment
 
     }
 
+    //Yes button handler class. Calls the MainActivity method and sends it true
     public class YesButtonHandler implements DialogInterface.OnClickListener
     {
 
@@ -42,6 +47,7 @@ public class DialogFrag extends DialogFragment
         }
     }
 
+    //No button handler class. Calls the MainActivity method and sends it false
     public class NoButtonHandler implements DialogInterface.OnClickListener
     {
 

@@ -16,12 +16,12 @@
         "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_colored_material.xml"
     },
     {
-        "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
-        "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_dialog_material_background_light.xml"
-    },
-    {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
         "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_dialog_material_background_light.xml",
+        "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_dialog_material_background_light.xml"
     },
     {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
@@ -42,6 +42,10 @@
     {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
         "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\apple.jpg",
+        "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\src\\main\\res\\drawable\\apple.jpg"
     },
     {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",

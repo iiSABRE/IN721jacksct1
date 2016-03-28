@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class TitleScreen extends AppCompatActivity {
 
-    UtilityManager manager = new UtilityManager();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,6 @@ public class TitleScreen extends AppCompatActivity {
         setContentView(R.layout.activity_title_screen);
 
 
-        manager.initalArraySetup();
 
         //Create handler
         Handler handler = new Handler();
@@ -38,6 +37,8 @@ public class TitleScreen extends AppCompatActivity {
     //ToMainActivity method chanes the current activity
     public void toMainActivity()
     {
+        UtilityManager manager = new UtilityManager();
+        manager.initalArraySetup();
         Intent changeActivityIntent = new Intent(this, QuestionScreen.class);
         changeActivityIntent.putExtra("Manager", manager);
         startActivity(changeActivityIntent);

@@ -5,14 +5,18 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.io.Serializable;
+
 public class TitleScreen extends AppCompatActivity {
+
+    UtilityManager manager = new UtilityManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen);
 
-        UtilityManager manager = new UtilityManager();
+
         manager.initalArraySetup();
 
         //Create handler
@@ -35,6 +39,7 @@ public class TitleScreen extends AppCompatActivity {
     public void toMainActivity()
     {
         Intent changeActivityIntent = new Intent(this, QuestionScreen.class);
+        changeActivityIntent.putExtra("Manager", manager);
         startActivity(changeActivityIntent);
     }
 

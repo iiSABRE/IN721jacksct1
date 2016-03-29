@@ -116,7 +116,7 @@ public class QuestionScreen extends AppCompatActivity {
     {
 
         TextView questionNumber = (TextView) findViewById(R.id.tvQuestionNumber);
-        questionNumber.setText((String.valueOf(arrayPos + 1)));
+        questionNumber.setText((String.valueOf(arrayPos + 1)) + " of " + questionArray.size());
         ImageView image = (ImageView) findViewById(R.id.ivQuestionImage);
         image.setBackgroundResource(questionArray.get(arrayPos).getPicture());
     }

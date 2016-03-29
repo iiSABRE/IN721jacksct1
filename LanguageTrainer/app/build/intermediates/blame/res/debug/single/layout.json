@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_results_screen.xml",
+        "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\src\\main\\res\\layout\\activity_results_screen.xml"
+    },
+    {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
         "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_screen_toolbar.xml"
     },
@@ -102,6 +106,10 @@
     {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
         "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dialog_feedback.xml",
+        "source": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\src\\main\\res\\layout\\activity_dialog_feedback.xml"
     },
     {
         "merged": "C:\\Users\\jacksct1\\Desktop\\IN721jacksct1\\LanguageTrainer\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",

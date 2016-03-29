@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuestionScreen"></activity>
+        <activity android:name=".QuestionScreen" />
+        <activity android:name=".DialogFeedback" />
+        <activity android:name=".ResultsScreen"></activity>
     </application>
 
 </manifest>

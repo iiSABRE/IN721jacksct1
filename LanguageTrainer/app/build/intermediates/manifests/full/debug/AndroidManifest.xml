@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name="bit.jacksct1.languagetrainer.QuestionScreen" />
+        <activity android:name="bit.jacksct1.languagetrainer.DialogFeedback" />
+        <activity android:name="bit.jacksct1.languagetrainer.ResultsScreen" />
     </application>
 
 </manifest>

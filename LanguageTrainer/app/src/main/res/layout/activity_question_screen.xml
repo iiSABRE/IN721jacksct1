@@ -21,10 +21,11 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/ivQuestionImage"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="44dp"
+        android:background="#f11f1f"
         android:layout_below="@+id/tvQuestionNumber"
         android:layout_centerHorizontal="true"
-        android:background="#f11f1f" />
+        android:layout_marginBottom="30dp" />
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -60,7 +61,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please select the Article the Image above belongs with. Press the Confrim Anser button after decison"
+        android:text="Please select the Article the Image above belongs with then click the &apos;Confirm Answer&apos; button"
         android:id="@+id/tvInstructions"
         android:layout_below="@+id/ivQuestionImage"
         android:layout_centerHorizontal="true" />

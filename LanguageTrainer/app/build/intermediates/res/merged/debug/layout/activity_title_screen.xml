@@ -7,14 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="bit.jacksct1.languagetrainer.TitleScreen">
+    tools:context="bit.jacksct1.languagetrainer.TitleScreen"
+    android:background="@drawable/learngerman">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Language Trainer Will Begin Shortly....."
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp" />
 </RelativeLayout>

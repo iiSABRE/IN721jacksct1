@@ -37,10 +37,8 @@ public class TitleScreen extends AppCompatActivity {
     //ToMainActivity method chanes the current activity
     public void toMainActivity()
     {
-        UtilityManager manager = new UtilityManager();
-        manager.initalArraySetup();
+
         Intent changeActivityIntent = new Intent(this, QuestionScreen.class);
-        changeActivityIntent.putExtra("Manager", manager);
         startActivity(changeActivityIntent);
     }
 

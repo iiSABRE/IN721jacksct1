@@ -5,19 +5,27 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 
 public class TitleScreen extends AppCompatActivity {
 
 
 
+=======
+public class TitleScreen extends AppCompatActivity {
+
+>>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title_screen);
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
         //Create handler
         Handler handler = new Handler();
         //Create runnable and generate it run method to call the toMainActivity()
@@ -37,6 +45,7 @@ public class TitleScreen extends AppCompatActivity {
     //ToMainActivity method chanes the current activity
     public void toMainActivity()
     {
+<<<<<<< HEAD
 
         Intent changeActivityIntent = new Intent(this, QuestionScreen.class);
         startActivity(changeActivityIntent);
@@ -46,4 +55,9 @@ public class TitleScreen extends AppCompatActivity {
     {
 
     }
+=======
+        Intent changeActivityIntent = new Intent(this, QuestionScreen.class);
+        startActivity(changeActivityIntent);
+    }
+>>>>>>> origin/master
 }

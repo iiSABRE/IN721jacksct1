@@ -15,9 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".QuestionScreen" />
         <activity android:name=".DialogFeedback" />
         <activity android:name=".ResultsScreen"></activity>
+=======
+        <activity android:name=".QuestionScreen"></activity>
+>>>>>>> origin/master
     </application>
 
 </manifest>

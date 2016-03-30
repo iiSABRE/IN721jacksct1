@@ -7,7 +7,19 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+<<<<<<< HEAD
     tools:context="bit.jacksct1.languagetrainer.TitleScreen"
     android:background="@drawable/learngerman">
 
+=======
+    tools:context="bit.jacksct1.languagetrainer.TitleScreen">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Splash"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="175dp" />
+>>>>>>> origin/master
 </RelativeLayout>

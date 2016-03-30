@@ -1,5 +1,6 @@
 package bit.jacksct1.languagetrainer;
 
+<<<<<<< HEAD
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -27,10 +28,18 @@ public class QuestionScreen extends AppCompatActivity {
     public int arrayPos = 0;
     public int correctGuesses = 0;
 
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class QuestionScreen extends AppCompatActivity {
+
+>>>>>>> origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_screen);
+<<<<<<< HEAD
 
 
         initalArraySetup();
@@ -139,4 +148,7 @@ public class QuestionScreen extends AppCompatActivity {
     }
 
 
+=======
+    }
+>>>>>>> origin/master
 }

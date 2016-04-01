@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 public class ActivityActivity extends AppCompatActivity {
 
@@ -15,6 +16,13 @@ public class ActivityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_);
+
+        setUpDataArray();
+
+        FunArrayAdaptor funAdaptor = new FunArrayAdaptor(this, R.layout.funtodo_custom_layout, toDoArray);
+
+        ListView lvFun = (ListView) findViewById(R.id.lvFunToDo);
+        lvFun.setAdapter(funAdaptor);
 
 
     }

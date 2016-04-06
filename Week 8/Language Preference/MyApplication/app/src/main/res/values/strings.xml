@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LanguagePreference</string>
+    <string-array name="selectColourArray">
+        <item>Black</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+    </string-array>
+</resources>

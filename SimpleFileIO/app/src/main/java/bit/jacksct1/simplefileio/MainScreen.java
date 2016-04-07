@@ -3,23 +3,26 @@ package bit.jacksct1.simplefileio;
 import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainScreen extends AppCompatActivity {
 
-    ArrayList<String> houseNamesArray;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        houseNamesArray = new ArrayList<String>();
+        ArrayList<String> houseNamesArray = new ArrayList<String>();
 
         String assetFileName = "great_houses.txt";
 
@@ -35,14 +38,22 @@ public class MainScreen extends AppCompatActivity {
 
         BufferedReader br = new BufferedReader(ir);
 
-        String newHouse = null;
+        String newHouse;
         try {
-            while ((newHouse = br.readLine()) != null);
-        } catch (IOException e) {
+            while ((newHouse = br.readLine()) != null)
+            {
+                houseNamesArray.add(newHouse);
+            }
+        }
+
+        catch (IOException e) {
             e.printStackTrace();
         }
-        {
-            houseNamesArray.add(newHouse);
-        }
+
+
+        ListView houseList = (ListView) findViewById(R.id.lvHouses);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, houseNamesArray);
+        houseList.setAdapter(arrayAdapter);
+
     }
 }

@@ -1,0 +1,11 @@
+Arryn
+Baratheon
+Bolton
+Frey
+Greyjoy
+Lannister
+Martell
+Stark
+Targaryen
+Tully
+Tyrell

@@ -22,35 +22,45 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        //Created the arraylist
         ArrayList<String> houseNamesArray = new ArrayList<String>();
-
+        //Create variable holding textfile name
         String assetFileName = "great_houses.txt";
 
+        //Create assetmanager
         AssetManager am = getAssets();
 
+        //Try and Catct to open file
         InputStream is = null;
-        try {
+        try
+        {
             is = am.open(assetFileName);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
-        InputStreamReader ir = new InputStreamReader(is);
 
+        //Create inputstreamreader and bufferreader
+        InputStreamReader ir = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(ir);
 
+        //Read textfile into array
         String newHouse;
-        try {
+        try
+        {
             while ((newHouse = br.readLine()) != null)
             {
                 houseNamesArray.add(newHouse);
             }
         }
 
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
-
+        //Set listview
         ListView houseList = (ListView) findViewById(R.id.lvHouses);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, houseNamesArray);
         houseList.setAdapter(arrayAdapter);

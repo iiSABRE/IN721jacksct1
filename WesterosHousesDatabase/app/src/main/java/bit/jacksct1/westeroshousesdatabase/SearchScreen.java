@@ -5,7 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -32,6 +36,10 @@ public class SearchScreen extends AppCompatActivity
         ArrayAdapter<String> colourAdapter = new ArrayAdapter<String>(this, layoutID, getSpinnerList() );
         houseSpinner.setAdapter(colourAdapter);
 
+        Button btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(new searchHandler());
+
+
     }
 
 
@@ -47,7 +55,7 @@ public class SearchScreen extends AppCompatActivity
         String createQuery = "CREATE TABLE IF NOT EXISTS tblPerson(" +
                 "personID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "personFirstName TEXT NOT NULL, " +
-                "personlastName TEXT NOT NULL, " +
+                "personLastName TEXT NOT NULL, " +
                 "houseName TEXT NOT NULL);";
         westerosPeopleAndHousesDB.execSQL(createQuery);
     }
@@ -81,10 +89,10 @@ public class SearchScreen extends AppCompatActivity
         westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walder', 'Rivers', 'Frey')");
         westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ryger', 'Rivers', 'Frey')");
         westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Balon', 'Greyjoy', 'Greyjoy')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Euron', 'Rivers', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rodrik', 'Rivers', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Yara', 'Rivers', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Theon', 'Rivers', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Euron', 'Greyjoy', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rodrik', 'Greyjoy', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Yara', 'Greyjoy', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Theon', 'Greyjoy', 'Greyjoy')");
         westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tywin', 'Lannister', 'Lannister')");
         westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Cersei', 'Lannister', 'Lannister')");
         westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Jamie', 'Lannister', 'Lannister')");
@@ -107,18 +115,11 @@ public class SearchScreen extends AppCompatActivity
 
 
 
-
-
-
-
-
-
-
     }
 
     public String[] getSpinnerList()
     {
-        String selectQuery = "SELECT DISTINCT houseName FROM tblPerson ORDER BY houseName DESC";
+        String selectQuery = "SELECT DISTINCT houseName FROM tblPerson ORDER BY houseName ASC";
         Cursor recordSet = westerosPeopleAndHousesDB.rawQuery(selectQuery, null);
 
         int recordCount = recordSet.getCount();
@@ -130,7 +131,7 @@ public class SearchScreen extends AppCompatActivity
 
         for (int i =0; i<recordCount;i++)
         {
-            spinnerArrayOfHouses[i] = "House " + recordSet.getString(houseNameIndex);
+            spinnerArrayOfHouses[i] = recordSet.getString(houseNameIndex);
             recordSet.moveToNext();
         }
 
@@ -138,11 +139,27 @@ public class SearchScreen extends AppCompatActivity
         return spinnerArrayOfHouses;
     }
 
-    public ArrayList<String> getListviewList(String houseName)
+    public String[] getListviewList(String houseName)
     {
-        ArrayList<String> listviewrArrayList = new ArrayList<String>();
+        String selectQuery = "SELECT * FROM tblPerson WHERE houseName = '" + houseName + "' ORDER BY personFirstName ASC";
+        Cursor recordSets = westerosPeopleAndHousesDB.rawQuery(selectQuery, null);
 
-        return listviewrArrayList;
+        int recordCount = recordSets.getCount();
+        String[] arrayOfPeople = new String[recordCount];
+
+        int personFirstNameIndex = recordSets.getColumnIndex("personFirstName");
+        int personLastNameIndex = recordSets.getColumnIndex("personLastName");
+
+        recordSets.moveToFirst();
+
+        for (int i =0; i<recordCount;i++)
+        {
+            arrayOfPeople[i] = recordSets.getString(personFirstNameIndex) + " " + recordSets.getString(personLastNameIndex);
+            recordSets.moveToNext();
+        }
+
+
+        return arrayOfPeople;
     }
 
     private void dropTable()
@@ -151,4 +168,22 @@ public class SearchScreen extends AppCompatActivity
         westerosPeopleAndHousesDB.execSQL(dropQuery);
     }
 
+    private class searchHandler implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v)
+        {
+            setListView();
+        }
+    }
+
+    private void setListView()
+    {
+        ListView personList = (ListView) findViewById(R.id.lvPeople);
+        Spinner houseSpinner = (Spinner) findViewById(R.id.spnHouseName);
+        String house = houseSpinner.getSelectedItem().toString();
+        ArrayAdapter<String> personAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getListviewList(house));
+        personList.setAdapter(personAdaptor);
+
+    }
 }

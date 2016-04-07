@@ -3,7 +3,9 @@ package bit.jacksct1.simplefileio;
 import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.io.BufferedReader;
@@ -22,6 +24,24 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        Button btnPop = (Button) findViewById(R.id.btnPopulate);
+        btnPop.setOnClickListener(new btnHandler());
+
+    }
+
+    private class btnHandler implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+
+         setList();
+
+
+
+        }
+    }
+
+    private void setList()
+    {
         //Created the arraylist
         ArrayList<String> houseNamesArray = new ArrayList<String>();
         //Create variable holding textfile name
@@ -64,6 +84,5 @@ public class MainScreen extends AppCompatActivity {
         ListView houseList = (ListView) findViewById(R.id.lvHouses);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, houseNamesArray);
         houseList.setAdapter(arrayAdapter);
-
     }
 }

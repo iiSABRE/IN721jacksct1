@@ -25,7 +25,10 @@
         android:layout_marginTop="52dp"
         android:layout_below="@+id/tvHeader"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+
+        android:layout_alignRight="@+id/tvHeader"
+        android:layout_alignEnd="@+id/tvHeader" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,12 +45,9 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:id="@+id/btnSearch"
-        android:layout_alignTop="@+id/spnHouseName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/spnHouseName"
-        android:layout_toRightOf="@+id/tvSelectHouse"
-        android:layout_toEndOf="@+id/tvSelectHouse" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/tvSelectHouse"
+        android:layout_alignStart="@+id/tvSelectHouse" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -56,5 +56,6 @@
         android:layout_below="@+id/spnHouseName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="37dp" />
+        android:layout_above="@+id/btnSearch"
+        android:paddingTop="20dp"/>
 </RelativeLayout>

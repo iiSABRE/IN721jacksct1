@@ -27,15 +27,18 @@ public class SearchScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_screen);
 
+        //Call methods to create database
         createDatabase();
         createTables();
         populateDatabase();
 
+        //Set up the spinner
         Spinner houseSpinner = (Spinner) findViewById(R.id.spnHouseName);
         int layoutID = android.R.layout.simple_spinner_item;
-        ArrayAdapter<String> colourAdapter = new ArrayAdapter<String>(this, layoutID, getSpinnerList() );
-        houseSpinner.setAdapter(colourAdapter);
+        ArrayAdapter<String> houseAdapter = new ArrayAdapter<String>(this, layoutID, getSpinnerList() );
+        houseSpinner.setAdapter(houseAdapter);
 
+        //Set the buttons onClickListener
         Button btnSearch = (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new searchHandler());
 
@@ -43,140 +46,158 @@ public class SearchScreen extends AppCompatActivity
     }
 
 
-
+    //createDatabase method creates database or opens if exists
     public void createDatabase()
     {
         westerosPeopleAndHousesDB = openOrCreateDatabase("westerosPeopleAndHousesDB",MODE_PRIVATE, null);
     }
 
+    //createTables method create the person table
     public void createTables()
     {
         dropTable();
         String createQuery = "CREATE TABLE IF NOT EXISTS tblPerson(" +
                 "personID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "personFirstName TEXT NOT NULL, " +
-                "personLastName TEXT NOT NULL, " +
                 "houseName TEXT NOT NULL);";
         westerosPeopleAndHousesDB.execSQL(createQuery);
     }
 
 
+    //populateDatabase method populate the person table with data
     public void populateDatabase()
     {
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Eddard', 'Stark', 'Stark')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rob', 'Stark', 'Stark')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Sansa', 'Stark', 'Stark')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Bran', 'Stark', 'Stark')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ayra', 'Stark', 'Stark')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Catelyn', 'Stark', 'Stark')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Jon', 'Arryn', 'Arryn')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Lysa', 'Arryn', 'Arryn')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Robin', 'Arryn', 'Arryn')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Robert', 'Baratheon', 'Baratheon')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Stannis', 'Baratheon', 'Baratheon')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Renly', 'Baratheon', 'Baratheon')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Joffrey', 'Baratheon', 'Baratheon')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Myrcella', 'Baratheon', 'Baratheon')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tommen', 'Baratheon', 'Baratheon')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Roose', 'Bolton', 'Bolton')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walda', 'Bolton', 'Bolton')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ramsay', 'Bolton', 'Bolton')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walder', 'Frey', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Joyeuse', 'Frey', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Stenron', 'Frey', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Lothar', 'Frey', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Roslin', 'Frey', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walder', 'Rivers', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ryger', 'Rivers', 'Frey')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Balon', 'Greyjoy', 'Greyjoy')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Euron', 'Greyjoy', 'Greyjoy')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rodrik', 'Greyjoy', 'Greyjoy')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Yara', 'Greyjoy', 'Greyjoy')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Theon', 'Greyjoy', 'Greyjoy')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tywin', 'Lannister', 'Lannister')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Cersei', 'Lannister', 'Lannister')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Jamie', 'Lannister', 'Lannister')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tyrion', 'Lannister', 'Lannister')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Lancel', 'Lannister', 'Lannister')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Doran', 'Martell', 'Martell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Elia', 'Martell', 'Martell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Oberyn', 'Martell', 'Martell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Trystane', 'Martell', 'Martell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Aemon', 'Targaryen', 'Targaryen')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Aegon', 'Targaryen', 'Targaryen')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Aerys', 'Targaryen', 'Targaryen')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rhaegar', 'Targaryen', 'Targaryen')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Viserys', 'Targaryen', 'Targaryen')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Daenerys', 'Targaryen', 'Targaryen')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Olenna', 'Tyrell', 'Tyrell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Mace', 'Tyrell', 'Tyrell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Margaery', 'Tyrell', 'Tyrell')");
-        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Loras', 'Tyrell', 'Tyrell')");
-
-
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Eddard', 'Stark')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rob', 'Stark')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Sansa', 'Stark')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Bran', 'Stark')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ayra', 'Stark')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Catelyn', 'Stark')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Jon', 'Arryn')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Lysa', 'Arryn')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Robin', 'Arryn')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Robert', 'Baratheon')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Stannis', 'Baratheon')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Renly', 'Baratheon')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Joffrey', 'Baratheon')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Myrcella', 'Baratheon')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tommen', 'Baratheon')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Roose', 'Bolton')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walda', 'Bolton')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ramsay', 'Bolton')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walder', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Joyeuse', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Stenron', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Lothar', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Roslin', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Walder', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Ryger', 'Frey')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Balon', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Euron', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rodrik', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Yara', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Theon', 'Greyjoy')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tywin', 'Lannister')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Cersei', 'Lannister')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Jamie', 'Lannister')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Tyrion', 'Lannister')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Lancel', 'Lannister')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Doran', 'Martell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Elia', 'Martell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Oberyn', 'Martell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Trystane', 'Martell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Aemon', 'Targaryen')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Aegon', 'Targaryen')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Aerys', 'Targaryen')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Rhaegar', 'Targaryen')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Viserys', 'Targaryen')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Daenerys', 'Targaryen')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Olenna', 'Tyrell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Mace', 'Tyrell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Margaery', 'Tyrell')");
+        westerosPeopleAndHousesDB.execSQL("INSERT INTO tblPerson VALUES(null, 'Loras', 'Tyrell')");
 
     }
 
+    //getSpinnerList method sets up the spinner
     public String[] getSpinnerList()
     {
+        //Select all distinct houses from the person table and orders them alphbetically
         String selectQuery = "SELECT DISTINCT houseName FROM tblPerson ORDER BY houseName ASC";
         Cursor recordSet = westerosPeopleAndHousesDB.rawQuery(selectQuery, null);
 
+        //Get the number of records from query
         int recordCount = recordSet.getCount();
+        //Create array to hold house names
         String[] spinnerArrayOfHouses = new String[recordCount];
 
+        //Get the index value of the houseName column
         int houseNameIndex = recordSet.getColumnIndex("houseName");
 
+        //Move pointer to the first positon
         recordSet.moveToFirst();
 
+        //Run through all retrieved records
         for (int i =0; i<recordCount;i++)
         {
+            //Add records string to array and move to next index
             spinnerArrayOfHouses[i] = recordSet.getString(houseNameIndex);
             recordSet.moveToNext();
         }
 
-
+        //Return the string array of houses
         return spinnerArrayOfHouses;
     }
 
+    //getListviewList method and pass it the house name to query on
     public String[] getListviewList(String houseName)
     {
+        //Select everything from person table when houseName is select house. Order alphbetically
         String selectQuery = "SELECT * FROM tblPerson WHERE houseName = '" + houseName + "' ORDER BY personFirstName ASC";
         Cursor recordSets = westerosPeopleAndHousesDB.rawQuery(selectQuery, null);
 
+        //Get the number of records from query
         int recordCount = recordSets.getCount();
+        //Create array to hold first names
         String[] arrayOfPeople = new String[recordCount];
 
+        //Get the index value of the houseName column
         int personFirstNameIndex = recordSets.getColumnIndex("personFirstName");
-        int personLastNameIndex = recordSets.getColumnIndex("personLastName");
 
+        //Move pointer to the first positon
         recordSets.moveToFirst();
 
+        //Run through all retrieved records
         for (int i =0; i<recordCount;i++)
         {
-            arrayOfPeople[i] = recordSets.getString(personFirstNameIndex) + " " + recordSets.getString(personLastNameIndex);
+            //Add records string to array and move to next index
+            arrayOfPeople[i] = recordSets.getString(personFirstNameIndex);
             recordSets.moveToNext();
         }
 
-
+        //Return the string array of first names
         return arrayOfPeople;
     }
 
+    //dropTable method drops person table if it exists
     private void dropTable()
     {
         String dropQuery = "DROP TABLE IF EXISTS tblPerson";
         westerosPeopleAndHousesDB.execSQL(dropQuery);
     }
 
+    //searchHandler method implementing the onClickListener
     private class searchHandler implements View.OnClickListener
     {
         @Override
         public void onClick(View v)
         {
+            //Calls the setListView method on click of search button
             setListView();
         }
     }
 
+    //setListView method populates the list view
     private void setListView()
     {
         ListView personList = (ListView) findViewById(R.id.lvPeople);

@@ -26,10 +26,12 @@ public class FillListScreen extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_list_screen);
 
+        //Calling methods to get data annd populate the listview
         getDataList();
         populateListView(dunEvents);
 
@@ -39,13 +41,15 @@ public class FillListScreen extends AppCompatActivity {
 
     }
 
+    //The getDataList method pulls the data from the JSON file and puts in an arrays for use
     public void getDataList()
     {
 
         String assetFileName = "dunedin_events.json";
 
-
         try {
+
+            //Reading the JSOn file and getting to the array that holds events
             AssetManager am = getAssets();
             inputStream = am.open(assetFileName);
 
@@ -64,7 +68,8 @@ public class FillListScreen extends AppCompatActivity {
             JSONObject eventOject = null;
             int nEvents = eventsArray.length();
 
-
+            //Loops through entire array of event objects and getting their title and description
+            //Putting those Strings into seperate arrays
             for (int i = 0; i<nEvents; i++)
             {
                 JSONObject event = eventsArray.getJSONObject(i);
@@ -76,8 +81,6 @@ public class FillListScreen extends AppCompatActivity {
 
             }
 
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -85,30 +88,29 @@ public class FillListScreen extends AppCompatActivity {
         }
 
 
-
-
-
-
     }
 
+    //populateListView accepts an array to be passed nito the listview
     public void populateListView(ArrayList eventArr)
     {
         ListView eventListView = (ListView) findViewById(R.id.lvEvents);
         eventListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, eventArr));
     }
 
+    //makeToast method creates a toast with the String that is passed when called
     public void makeToast(String des)
     {
         Toast.makeText(this, des ,Toast.LENGTH_LONG).show();
     }
 
 
+    //listenerEvent calls handles clicks on the listview
     public class listenerEvent implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
-            int pos = position;
-            String desc = dunEventsDes.get(pos);
+            //Gets the position the clicked item was in the listview and calls the toast method with the corresponding description from the des array
+            String desc = dunEventsDes.get(position);
             makeToast(desc);
         }
     }

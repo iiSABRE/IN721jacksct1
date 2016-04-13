@@ -4,7 +4,14 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,8 +20,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class TopArtistsScreen extends AppCompatActivity {
+
+    JSONObject topArtists;
+    ArrayList<String> topArtist = new ArrayList<String>();
+    ArrayList<String> artistListeners = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +82,42 @@ public class TopArtistsScreen extends AppCompatActivity {
             return JSONString;
         }
 
+        @Override
         protected void onPostExecute(String fetchedString)
         {
-            Toast.makeText(TopArtistsScreen.this,fetchedString, Toast.LENGTH_LONG).show();
+
+            try
+            {
+                topArtists = new JSONObject(fetchedString);
+                JSONObject artistsObject = topArtists.getJSONObject("artists");
+                JSONArray artistArray = artistsObject.getJSONArray("artist");
+
+                int nArtists = artistArray.length();
+
+                //Loops through entire array of event objects and getting their title and description
+                //Putting those Strings into seperate arrays
+                for (int i = 0; i<nArtists; i++)
+                {
+                    JSONObject event = artistArray.getJSONObject(i);
+                    String name = event.getString("name");
+                    String count = event.getString("listeners");
+                    topArtist.add(name + " " + count);
+                    //artistListeners.add(count);
+                    populateListview(topArtist);
+
+                }
+            }
+            catch (JSONException e)
+            {
+                Toast.makeText(TopArtistsScreen.this,"", Toast.LENGTH_LONG).show();
+            }
+
         }
+    }
+
+    protected void populateListview (ArrayList artists)
+    {
+        ListView topListView = (ListView) findViewById(R.id.lvTop20);
+        topListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, artists));
     }
 }

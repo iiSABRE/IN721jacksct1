@@ -12,9 +12,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top Artists"
-        android:id="@+id/textView2"
+        android:text="Top 20"
+        android:id="@+id/tvTopHeader"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="89dp" />
+        android:textSize="45dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvTop20"
+        android:layout_below="@+id/tvTopHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="77dp" />
+
 </RelativeLayout>

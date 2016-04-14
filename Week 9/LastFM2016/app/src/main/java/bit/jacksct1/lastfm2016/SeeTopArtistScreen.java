@@ -25,12 +25,12 @@ import java.net.URL;
 
 public class SeeTopArtistScreen extends AppCompatActivity {
 
-    String imgURLString;
+
     Bitmap personImg;
     InputStream inputStream = null;
-    String urlImgString;
     String JSONString;
     String name;
+    String headerName;
 
 
     @Override
@@ -105,6 +105,7 @@ public class SeeTopArtistScreen extends AppCompatActivity {
                 JSONObject artistsObject = topArtists.getJSONObject("artists");
                 JSONArray artistArray = artistsObject.getJSONArray("artist");
                 JSONObject first = artistArray.getJSONObject(0);
+                headerName = first.getString("name");
                 JSONArray image = first.getJSONArray("image");
                 JSONObject largeImg = image.getJSONObject(3);
                 name = largeImg.getString("#text");
@@ -133,6 +134,9 @@ public class SeeTopArtistScreen extends AppCompatActivity {
             ImageView img = (ImageView) findViewById(R.id.ivTopPer);
             img.setImageBitmap(fetchedString);
 
+            TextView txt = (TextView) findViewById(R.id.tvImageHeader);
+            txt.setText(headerName);
+
         }
 
 
@@ -147,6 +151,7 @@ public class SeeTopArtistScreen extends AppCompatActivity {
         @Override
         public void onClick(View v)
         {
+            headerName = null;
             WebService webSer = new WebService();
             webSer.execute();
 

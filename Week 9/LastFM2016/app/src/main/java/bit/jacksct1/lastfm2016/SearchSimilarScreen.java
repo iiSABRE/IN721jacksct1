@@ -1,11 +1,11 @@
 package bit.jacksct1.lastfm2016;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,34 +20,28 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
-public class TopArtistsScreen extends AppCompatActivity {
-
-    JSONObject topArtists;
-    ArrayList<TopArtist> topArtist = new ArrayList<>();
-
+public class SearchSimilarScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_top_artists_screen);
+        setContentView(R.layout.activity_search_similar_screen);
 
-        WebService APIThread = new WebService();
-        APIThread.execute();
-
+        Button btnSearch = (Button)findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(new searchHandler());
     }
 
-    class WebService extends AsyncTask<Void,Void,String>
+    class WebService extends AsyncTask<String,Void,String>
     {
 
         @Override
-        protected String doInBackground(Void... params)
+        protected String doInBackground(String... searchedName)
         {
             String JSONString = null;
             try
             {
-                String urlString = "http://ws.audioscrobbler.com/2.0/?method=chart.getTopArtists&limit=20&api_key=58384a2141a4b9737eacb9d0989b8a8c&format=json";
+                String urlString = "http://ws.audioscrobbler.com/2.0/?method=artist.getSimilar&artist=" + searchedName + "&limit=10&api_key=58384a2141a4b9737eacb9d0989b8a8c&format=json";
 
                 URL URLObject = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
@@ -56,7 +50,7 @@ public class TopArtistsScreen extends AppCompatActivity {
                 int responseCode = connection.getResponseCode();
                 if (responseCode != 200)
                 {
-                    Toast.makeText(TopArtistsScreen.this, "Failed to retrieve data from web", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SearchSimilarScreen.this, "Failed to retrieve data from web", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -74,9 +68,9 @@ public class TopArtistsScreen extends AppCompatActivity {
                 }
 
             } catch (MalformedURLException e) {
-                Toast.makeText(TopArtistsScreen.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
+                Toast.makeText(SearchSimilarScreen.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
             } catch (IOException e) {
-                Toast.makeText(TopArtistsScreen.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
+                Toast.makeText(SearchSimilarScreen.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
             }
 
             return JSONString;
@@ -88,8 +82,8 @@ public class TopArtistsScreen extends AppCompatActivity {
 
             try
             {
-                topArtists = new JSONObject(fetchedString);
-                JSONObject artistsObject = topArtists.getJSONObject("artists");
+                JSONObject simArtists = new JSONObject(fetchedString);
+                JSONObject artistsObject = simArtists.getJSONObject("artists");
                 JSONArray artistArray = artistsObject.getJSONArray("artist");
 
                 int nArtists = artistArray.length();
@@ -103,26 +97,33 @@ public class TopArtistsScreen extends AppCompatActivity {
                     String count = event.getString("listeners");
                     TopArtist top = new TopArtist(name,count);
 
-                    topArtist.add(top);
+                    //topArtist.add(top);
 
 
                 }
-                populateListview(topArtist);
+                //populateListview(topArtist);
             }
             catch (JSONException e)
             {
-                Toast.makeText(TopArtistsScreen.this,"Couldnt get artist information", Toast.LENGTH_LONG).show();
+                //Toast.makeText(TopArtistsScreen.this,"Couldnt get artist information", Toast.LENGTH_LONG).show();
             }
 
+            TextView tx = (TextView) findViewById(R.id.tvSearchHead2);
+            tx.setText(fetchedString);
         }
 
 
     }
 
-    protected void populateListview (ArrayList<TopArtist> artists)
+    private class searchHandler implements View.OnClickListener
     {
-        ListView topListView = (ListView) findViewById(R.id.lvTop20);
-        TopArtistAdapter adapter = new TopArtistAdapter(this, R.layout.top20_custom_layout, artists);
-        topListView.setAdapter(adapter);
+        @Override
+        public void onClick(View v)
+        {
+            EditText etName = (EditText)findViewById(R.id.etName);
+            String searchedName = etName.getText().toString();
+            WebService APIThread = new WebService();
+            APIThread.execute(searchedName);
+        }
     }
 }

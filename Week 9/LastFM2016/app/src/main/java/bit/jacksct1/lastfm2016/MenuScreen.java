@@ -40,7 +40,7 @@ public class MenuScreen extends AppCompatActivity {
                     startActivity(intent);
                     break;
                 case 1:
-                    Intent intent2 = new Intent(MenuScreen.this, MenuScreen.class);
+                    Intent intent2 = new Intent(MenuScreen.this, SearchSimilarScreen.class);
                     startActivity(intent2);
                     break;
                 case 2:

@@ -134,9 +134,6 @@ public class SearchSimilarScreen extends AppCompatActivity {
             EditText etName = (EditText)findViewById(R.id.etName);
             String searchedName = etName.getText().toString();
 
-            TextView tx = (TextView) findViewById(R.id.tvSearchHeader);
-            tx.setText(searchedName);
-
             WebService APIThread = new WebService();
             APIThread.execute(searchedName);
 

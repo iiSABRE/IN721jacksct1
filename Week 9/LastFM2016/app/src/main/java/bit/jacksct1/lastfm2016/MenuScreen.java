@@ -44,7 +44,7 @@ public class MenuScreen extends AppCompatActivity {
                     startActivity(intent2);
                     break;
                 case 2:
-                    Intent intent3 = new Intent(MenuScreen.this, MenuScreen.class);
+                    Intent intent3 = new Intent(MenuScreen.this, SeeTopArtistScreen.class);
                     startActivity(intent3);
                     break;
                 default:

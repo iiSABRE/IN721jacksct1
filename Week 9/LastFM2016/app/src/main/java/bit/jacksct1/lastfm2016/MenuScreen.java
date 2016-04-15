@@ -20,9 +20,11 @@ public class MenuScreen extends AppCompatActivity {
 
         ListView menuListView = (ListView)findViewById(R.id.lvMenu);
 
+        //Fill array for menu options
         String[] menuArray = new String[]{"Top 20 Artists", "Search Similar Artists", "View Number 1"};
         menuListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuArray));
 
+        //Set listener for menu listview
         menuListView.setOnItemClickListener(new listenerEvent());
 
 

@@ -56,43 +56,52 @@ public class MainActivity extends AppCompatActivity {
         {
             String JSONString = null;
             Manager manager = new Manager();
+
             latitude = manager.getLat();
             longitude = manager.getLong();
 
-            try
+            boolean nonExists = true;
+            while (nonExists)
             {
-                String urlString = "http://www.geoplugin.net/extras/location.gp?lat=" + latitude + "&long=" + longitude + "&format=json";
+                try {
+                    String urlString = "http://www.geoplugin.net/extras/location.gp?lat=" + latitude + "&long=" + longitude + "&format=json";
 
-                URL URLObject = new URL(urlString);
-                HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
-                connection.connect();
+                    URL URLObject = new URL(urlString);
+                    HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
+                    connection.connect();
 
-                int responseCode = connection.getResponseCode();
-                if (responseCode != 200)
-                {
-                    Toast.makeText(MainActivity.this, "Failed to retrieve data from web", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    InputStream inputStream = connection.getInputStream();
-                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode != 200) {
+                        Toast.makeText(MainActivity.this, "Failed to retrieve data from web", Toast.LENGTH_LONG).show();
+                    } else {
+                        InputStream inputStream = connection.getInputStream();
+                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-                    String responseString;
-                    StringBuilder stringBuilder = new StringBuilder();
-                    while((responseString = bufferedReader.readLine()) != null)
-                    {
-                        stringBuilder = stringBuilder.append(responseString);
+                        String responseString;
+                        StringBuilder stringBuilder = new StringBuilder();
+                        while ((responseString = bufferedReader.readLine()) != null) {
+                            stringBuilder = stringBuilder.append(responseString);
+                        }
+                        JSONString = stringBuilder.toString();
+
+                        if (!(JSONString.equals(getResources().getString(R.string.noNearestCheck))))
+                        {
+                            nonExists = false;
+                        }
+                        else
+                        {
+                            latitude = manager.getLat();
+                            longitude = manager.getLong();
+                        }
                     }
-                    JSONString = stringBuilder.toString();
+
+                } catch (MalformedURLException e) {
+                    Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
                 }
-
-            } catch (MalformedURLException e) {
-                Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
-            } catch (IOException e) {
-                Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
             }
-
             return JSONString;
         }
 
@@ -100,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String fetchedString)
         {
 
-            Toast.makeText(MainActivity.this, "-"+fetchedString+"-", Toast.LENGTH_LONG).show();
+
             try {
                 if (fetchedString.equals(getResources().getString(R.string.noNearestCheck)))
                 {

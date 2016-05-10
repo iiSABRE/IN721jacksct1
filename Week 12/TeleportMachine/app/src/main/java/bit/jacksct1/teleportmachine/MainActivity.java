@@ -1,11 +1,14 @@
 package bit.jacksct1.teleportmachine;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     String longitude;
     ProgressDialog progressDialog;
     String closestcity;
+    String farmURL;
+    Bitmap closePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             String JSONStrings = null;
 
             try {
-                String urlStringFlickr = "https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&method=flickr.photos.search&api_key=eda41a123d459be0f85276d37290651e&tags=dunedin";
+                String urlStringFlickr = "https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&method=flickr.photos.search&api_key=eda41a123d459be0f85276d37290651e&tags=new york";
 
                 URL URLObject = new URL(urlStringFlickr);
                 HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
@@ -222,30 +227,86 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject photosObject = photos.getJSONObject("photos");
                 JSONArray photoArray = photosObject.getJSONArray("photo");
+                JSONObject firstPhoto = photoArray.getJSONObject(2);
 
-                TextView tvFlickr = (TextView) findViewById(R.id.tvFlickr);
-                tvFlickr.setText(photoArray.toString());
-
-
-              /*  String closestcity = photos.getString("geoplugin_place");
-                    String country = nearestCity.getString("geoplugin_countryCode");
-                    TextView nearest = (TextView) findViewById(R.id.tvNearest);
-                    nearest.setText("Closest City: " + closestcity + ", " + country);
-
-                    TextView tvLong = (TextView) findViewById(R.id.tvLongValue);
-                    tvLong.setText(longitude);
-
-                    TextView tvLat = (TextView) findViewById(R.id.tvLatValue);
-                    tvLat.setText(latitude);
+                if(photoArray.toString().equals("[]"))
+                {
+                    Toast.makeText(MainActivity.this, "No Images Found", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
 
 
-*/
+
+
+                    String farm = firstPhoto.getString("farm");
+                    String server = firstPhoto.getString("server");
+                    String image = firstPhoto.getString("id");
+                    String secret = firstPhoto.getString("server");
+
+                    farmURL = "https://farm" + farm + ".staticflickr.com/" + server + "/" + image + "_" + secret + ".jpg";
+
+                }
+
+
 
             } catch (JSONException e) {
                 Toast.makeText(MainActivity.this, "Couldnt get location information 2", Toast.LENGTH_LONG).show();
             }
 
+            ImageService APIThread3 = new ImageService();
+            APIThread3.execute();
+
         }
+
+    }
+
+
+
+
+
+    class ImageService extends AsyncTask<Void,Void,Bitmap>
+    {
+
+
+        @Override
+        protected Bitmap doInBackground(Void... params)
+        {
+
+            try
+            {
+                    URL URLObject = new URL(farmURL);
+                    HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
+                    connection.connect();
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode != 200)
+                    {
+                        Toast.makeText(MainActivity.this, "Failed to retrieve image from web", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        InputStream inputStream = connection.getInputStream();
+                        closePhoto = BitmapFactory.decodeStream(inputStream);
+
+
+                    }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return closePhoto;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap fetchedString)
+        {
+
+            ImageView img = (ImageView) findViewById(R.id.ivFarm);
+            img.setImageBitmap(fetchedString);
+
+
+        }
+
 
     }
 }

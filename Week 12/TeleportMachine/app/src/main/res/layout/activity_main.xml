@@ -67,15 +67,16 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="42dp" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/tvFlickr"
+        android:id="@+id/ivFarm"
         android:layout_below="@+id/tvNearest"
-        android:layout_toRightOf="@+id/tvNearest"
-        android:layout_marginTop="44dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="42dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

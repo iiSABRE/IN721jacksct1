@@ -1,5 +1,6 @@
 package bit.jacksct1.teleportmachine;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     String latitude;
     String longitude;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class WebService extends AsyncTask<Void,Void,String>
+    class WebService extends AsyncTask<Void,Integer,String>
     {
+        @Override
+        protected void onPreExecute() {
+
+
+            progressDialog = ProgressDialog.show(MainActivity.this, "", "Loading.....Attempts 0", true);
+
+        }
+
 
         @Override
         protected String doInBackground(Void... params)
@@ -61,9 +71,15 @@ public class MainActivity extends AppCompatActivity {
             longitude = manager.getLong();
 
             boolean nonExists = true;
+            Integer progress = 0;
             while (nonExists)
             {
-                try {
+
+
+                try
+                {
+
+                   // publishProgress(0);
                     String urlString = "http://www.geoplugin.net/extras/location.gp?lat=" + latitude + "&long=" + longitude + "&format=json";
 
                     URL URLObject = new URL(urlString);
@@ -93,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                         {
                             latitude = manager.getLat();
                             longitude = manager.getLong();
+                            progress++;
+                            publishProgress(progress);
                         }
                     }
 
@@ -102,13 +120,26 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
                 }
             }
+
             return JSONString;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+
+
+            super.onProgressUpdate(progress);
+
+            progressDialog.setMessage("Loading.....Attempts " + progress[0]);
+
+
+
         }
 
         @Override
         protected void onPostExecute(String fetchedString)
         {
-
+            progressDialog.dismiss();
 
             try {
                 if (fetchedString.equals(getResources().getString(R.string.noNearestCheck)))

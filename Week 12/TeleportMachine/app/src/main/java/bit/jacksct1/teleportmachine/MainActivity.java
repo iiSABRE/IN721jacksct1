@@ -229,9 +229,9 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject photosObject = photos.getJSONObject("photos");
                 JSONArray photoArray = photosObject.getJSONArray("photo");
-                JSONObject firstPhoto = photoArray.getJSONObject(2);
+                JSONObject firstPhoto = photoArray.getJSONObject(0);
 
-                if(photoArray.toString().equals("[]"))
+                if((photoArray.toString().equals("[]"))||(photoArray==null))
                 {
                     Toast.makeText(MainActivity.this, "No Images Found", Toast.LENGTH_LONG).show();
                 }
@@ -245,16 +245,18 @@ public class MainActivity extends AppCompatActivity {
 
                     farmURL = "https://farm" + farm + ".staticflickr.com/" + server + "/" + image + "_" + secret + ".jpg";
 
+
+                    ImageService APIThread3 = new ImageService();
+                    APIThread3.execute();
                 }
 
 
 
             } catch (JSONException e) {
-                Toast.makeText(MainActivity.this, "Couldnt get location information 2", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "No Images Found", Toast.LENGTH_LONG).show();
             }
 
-            ImageService APIThread3 = new ImageService();
-            APIThread3.execute();
+
 
         }
 
@@ -284,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else
                     {
+                        closePhoto = null;
                         InputStream inputStream = connection.getInputStream();
                         closePhoto = BitmapFactory.decodeStream(inputStream);
 

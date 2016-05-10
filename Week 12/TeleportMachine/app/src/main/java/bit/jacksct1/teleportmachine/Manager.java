@@ -12,13 +12,15 @@ public class Manager
 
     public String getLat()
     {
-        String latitude = Integer.toString(generator.nextInt(180) - 90);
+        double lat = -90.000 + generator.nextDouble() * 180;
+        String latitude = Double.toString(lat);
         return latitude;
     }
 
     public String getLong()
     {
-        String longitude = Integer.toString(generator.nextInt(360) - 180);
+        double lng = -180.000 + generator.nextDouble() * 360;
+        String longitude = Double.toString(lng);
         return longitude;
     }
 

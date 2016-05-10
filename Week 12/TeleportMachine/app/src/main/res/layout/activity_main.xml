@@ -58,4 +58,14 @@
         android:layout_below="@+id/tvLongValue"
         android:layout_alignRight="@+id/tvLongValue"
         android:layout_alignEnd="@+id/tvLongValue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tvNearest"
+        android:layout_below="@+id/tvLatTilte"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="42dp" />
 </RelativeLayout>

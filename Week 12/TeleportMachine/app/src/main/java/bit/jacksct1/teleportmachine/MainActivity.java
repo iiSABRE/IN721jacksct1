@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     String latitude;
     String longitude;
     ProgressDialog progressDialog;
+    String closestcity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +38,20 @@ public class MainActivity extends AppCompatActivity {
         teleport.setOnClickListener(new teleportClick());
 
 
-
     }
 
     private class teleportClick implements View.OnClickListener {
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
 
             WebService APIThread = new WebService();
             APIThread.execute();
+
+
         }
     }
 
-    class WebService extends AsyncTask<Void,Integer,String>
-    {
+    class WebService extends AsyncTask<Void, Integer, String> {
         @Override
         protected void onPreExecute() {
 
@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         @Override
-        protected String doInBackground(Void... params)
-        {
+        protected String doInBackground(Void... params) {
             String JSONString = null;
             Manager manager = new Manager();
 
@@ -72,14 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
             boolean nonExists = true;
             Integer progress = 0;
-            while (nonExists)
-            {
+            while (nonExists) {
 
 
-                try
-                {
+                try {
 
-                   // publishProgress(0);
+                    // publishProgress(0);
                     String urlString = "http://www.geoplugin.net/extras/location.gp?lat=" + latitude + "&long=" + longitude + "&format=json";
 
                     URL URLObject = new URL(urlString);
@@ -101,12 +98,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                         JSONString = stringBuilder.toString();
 
-                        if (!(JSONString.equals(getResources().getString(R.string.noNearestCheck))))
-                        {
+                        if (!(JSONString.equals(getResources().getString(R.string.noNearestCheck)))) {
                             nonExists = false;
-                        }
-                        else
-                        {
+                        } else {
                             latitude = manager.getLat();
                             longitude = manager.getLong();
                             progress++;
@@ -133,28 +127,23 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.setMessage("Loading.....Attempts " + progress[0]);
 
 
-
         }
 
         @Override
-        protected void onPostExecute(String fetchedString)
-        {
+        protected void onPostExecute(String fetchedString) {
             progressDialog.dismiss();
 
             try {
-                if (fetchedString.equals(getResources().getString(R.string.noNearestCheck)))
-                {
+                if (fetchedString.equals(getResources().getString(R.string.noNearestCheck))) {
                     Toast.makeText(MainActivity.this, "No nearest city", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                } else {
                     JSONObject nearestCity = new JSONObject(fetchedString);
 
 
-                    String closestcity = nearestCity.getString("geoplugin_place");
+                    closestcity = nearestCity.getString("geoplugin_place");
                     String country = nearestCity.getString("geoplugin_countryCode");
                     TextView nearest = (TextView) findViewById(R.id.tvNearest);
-                    nearest.setText("Closest City: " + closestcity +", " + country);
+                    nearest.setText("Closest City: " + closestcity + ", " + country);
 
                     TextView tvLong = (TextView) findViewById(R.id.tvLongValue);
                     tvLong.setText(longitude);
@@ -162,18 +151,102 @@ public class MainActivity extends AppCompatActivity {
                     TextView tvLat = (TextView) findViewById(R.id.tvLatValue);
                     tvLat.setText(latitude);
 
+
                 }
 
 
+            } catch (JSONException e) {
+                Toast.makeText(MainActivity.this, "Couldnt get location information 1", Toast.LENGTH_LONG).show();
+            }
 
-            }
-            catch (JSONException e)
-            {
-                Toast.makeText(MainActivity.this,"Couldnt get location information", Toast.LENGTH_LONG).show();
-            }
+            FlickrService APIThread2 = new FlickrService();
+            APIThread2.execute();
+
 
         }
 
 
     }
+
+    class FlickrService extends AsyncTask<Void, Void, String> {
+
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String JSONStrings = null;
+
+            try {
+                String urlStringFlickr = "https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&method=flickr.photos.search&api_key=eda41a123d459be0f85276d37290651e&tags=dunedin";
+
+                URL URLObject = new URL(urlStringFlickr);
+                HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
+                connection.connect();
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode != 200) {
+                    Toast.makeText(MainActivity.this, "Failed to retrieve data from web", Toast.LENGTH_LONG).show();
+                } else {
+                    InputStream inputStream = connection.getInputStream();
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                    String responseString;
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((responseString = bufferedReader.readLine()) != null) {
+                        stringBuilder = stringBuilder.append(responseString);
+                    }
+                    JSONStrings = stringBuilder.toString();
+
+                }
+
+            } catch (MalformedURLException e) {
+                Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
+            } catch (IOException e) {
+                Toast.makeText(MainActivity.this, "Failed to get JSONString", Toast.LENGTH_LONG).show();
+            }
+
+            return JSONStrings;
+        }
+
+
+        @Override
+        protected void onPostExecute(String fetchedString) {
+
+
+
+            try
+
+            {
+
+                JSONObject photos = new JSONObject(fetchedString);
+
+                JSONObject photosObject = photos.getJSONObject("photos");
+                JSONArray photoArray = photosObject.getJSONArray("photo");
+
+                TextView tvFlickr = (TextView) findViewById(R.id.tvFlickr);
+                tvFlickr.setText(photoArray.toString());
+
+
+              /*  String closestcity = photos.getString("geoplugin_place");
+                    String country = nearestCity.getString("geoplugin_countryCode");
+                    TextView nearest = (TextView) findViewById(R.id.tvNearest);
+                    nearest.setText("Closest City: " + closestcity + ", " + country);
+
+                    TextView tvLong = (TextView) findViewById(R.id.tvLongValue);
+                    tvLong.setText(longitude);
+
+                    TextView tvLat = (TextView) findViewById(R.id.tvLatValue);
+                    tvLat.setText(latitude);
+
+
+*/
+
+            } catch (JSONException e) {
+                Toast.makeText(MainActivity.this, "Couldnt get location information 2", Toast.LENGTH_LONG).show();
+            }
+
+        }
+
+    }
 }
+

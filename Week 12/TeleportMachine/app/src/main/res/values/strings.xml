@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Teleport Machine</string>
+    <string name="noNearestCheck">[[]]</string>
 </resources>

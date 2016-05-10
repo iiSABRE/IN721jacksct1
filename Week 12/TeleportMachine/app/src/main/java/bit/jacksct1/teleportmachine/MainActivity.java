@@ -43,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v)
         {
 
-            TextView tvLong = (TextView) findViewById(R.id.tvLongValue);
-            tvLong.setText(new Manager().getLong());
-
-            TextView tvLat = (TextView) findViewById(R.id.tvLatValue);
-            tvLat.setText(new Manager().getLat());
-
             WebService APIThread = new WebService();
             APIThread.execute();
         }
@@ -61,10 +55,13 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(Void... params)
         {
             String JSONString = null;
+            Manager manager = new Manager();
+            latitude = manager.getLat();
+            longitude = manager.getLong();
 
             try
             {
-                String urlString = "http://www.geoplugin.net/extras/location.gp?lat=-45.8787605&long=170.5027976&format=json";
+                String urlString = "http://www.geoplugin.net/extras/location.gp?lat=" + latitude + "&long=" + longitude + "&format=json";
 
                 URL URLObject = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
@@ -103,18 +100,27 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String fetchedString)
         {
 
+            Toast.makeText(MainActivity.this, "-"+fetchedString+"-", Toast.LENGTH_LONG).show();
             try {
-                if (fetchedString == "[[]]")
+                if (fetchedString.equals(getResources().getString(R.string.noNearestCheck)))
                 {
                     Toast.makeText(MainActivity.this, "No nearest city", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
                     JSONObject nearestCity = new JSONObject(fetchedString);
+
+
                     String closestcity = nearestCity.getString("geoplugin_place");
                     String country = nearestCity.getString("geoplugin_countryCode");
                     TextView nearest = (TextView) findViewById(R.id.tvNearest);
                     nearest.setText("Closest City: " + closestcity +", " + country);
+
+                    TextView tvLong = (TextView) findViewById(R.id.tvLongValue);
+                    tvLong.setText(longitude);
+
+                    TextView tvLat = (TextView) findViewById(R.id.tvLatValue);
+                    tvLat.setText(latitude);
 
                 }
 

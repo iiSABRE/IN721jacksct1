@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            ImageView image = (ImageView) findViewById(R.id.ivFarm);
+            image.setImageResource(0);
             WebService APIThread = new WebService();
             APIThread.execute();
 
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             String JSONStrings = null;
 
             try {
-                String urlStringFlickr = "https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&method=flickr.photos.search&api_key=eda41a123d459be0f85276d37290651e&tags=new york";
+                String urlStringFlickr = "https://api.flickr.com/services/rest/?format=json&nojsoncallback=1&method=flickr.photos.search&api_key=eda41a123d459be0f85276d37290651e&tags=" + closestcity;
 
                 URL URLObject = new URL(urlStringFlickr);
                 HttpURLConnection connection = (HttpURLConnection) URLObject.openConnection();
@@ -235,9 +237,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-
-
-
 
                     String farm = firstPhoto.getString("farm");
                     String server = firstPhoto.getString("server");

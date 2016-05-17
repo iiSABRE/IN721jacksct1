@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView ivCharles = (ImageView) findViewById(R.id.ivCharles);
         Float yPos = ivCharles.getY();
+        Float xPos = ivCharles.getX();
 
         if(event.values[1] > 1)
         {
@@ -90,6 +91,26 @@ public class MainActivity extends AppCompatActivity {
             {
                 yPos = yPos - 25;
                 ivCharles.setY(yPos);
+            }
+
+        }
+
+        if(event.values[0] > 0)
+        {
+            if((xPos > 0))
+            {
+                xPos = xPos - 25;
+                ivCharles.setX(xPos);
+            }
+
+        }
+
+        if(event.values[0] < 0)
+        {
+            if(!(xPos+(ivCharles.getWidth()) > rlParent.getWidth()))
+            {
+                xPos = xPos + 25;
+                ivCharles.setX(xPos);
             }
 
         }

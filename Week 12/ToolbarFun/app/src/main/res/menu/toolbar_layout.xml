@@ -3,9 +3,16 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_item_add"
+        android:id="@+id/menu_item_write"
         android:icon="@drawable/write"
         android:title="Write"
+        app:showAsAction="ifRoom|withText">
+    </item>
+
+    <item
+        android:id="@+id/menu_item_add"
+        android:icon="@drawable/add"
+        android:title="Add"
         app:showAsAction="ifRoom|withText">
     </item>
 
@@ -13,13 +20,6 @@
         android:id="@+id/menu_item_delete"
         android:icon="@drawable/delete"
         android:title="Delete"
-        app:showAsAction="ifRoom|withText">
-    </item>
-
-    <item
-        android:id="@+id/menu_item_settings"
-        android:icon="@drawable/settings"
-        android:title="Settings"
         app:showAsAction="ifRoom|withText">
     </item>
 

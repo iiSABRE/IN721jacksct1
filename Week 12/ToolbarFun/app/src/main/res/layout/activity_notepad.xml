@@ -25,12 +25,23 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Sample"
         android:id="@+id/tvNotepad"
-        android:layout_below="@+id/tvNotepadTitle"
-        android:layout_marginTop="37dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:background="#d2cccc" />
+        android:background="#d2cccc"
+        android:layout_below="@+id/edEnter" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edEnter"
+        android:layout_below="@+id/tvNotepadTitle"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:enabled="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 </RelativeLayout>

@@ -15,7 +15,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     GoogleMap mMap;
-    LatLng dunedinLatLng = new LatLng(36.89,170.23);
+    LatLng dunedinLatLng = new LatLng(45.8788,-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////170.5028);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
